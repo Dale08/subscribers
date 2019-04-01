@@ -12,15 +12,20 @@
                 data: {'sub_id' : u_id},
                 success: function (data) {
                     if(1 === data.success){
-                        $(e.target).parent('div').html(data.link);
+                        $(e.target).attr('href', data.link);
+                        $(e.target).text(data.text);
+                        $(e.target).toggleClass( 'btn-danger' );
+                        // $(e.target).parent('div').html(data.link);
                     }
-
-
-                    console.log(e);
-
                 },
-                fail: function () {
-                    alert('Ajax Error!')
+                statusCode: {
+                    404: function () {
+                        alert('User not found');
+                    },
+
+                    400: function () {
+                        alert('Bad request');
+                    }
                 }
             });
     });

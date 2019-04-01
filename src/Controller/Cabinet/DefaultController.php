@@ -30,6 +30,7 @@ class DefaultController extends AbstractController
      */
     public function indexAction()
     {
+        dump($this->container);
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
         $subns = $user->getSubscriptions()->map(function($obj){return $obj->getId();})->getValues();
@@ -45,7 +46,7 @@ class DefaultController extends AbstractController
      * @Route("/posts", name="_posts")
      * @Template()
      */
-    public function postsAction()
+    public function posts()
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
@@ -61,7 +62,7 @@ class DefaultController extends AbstractController
      * @Route("/post/add", name="_post_add")
      * @Template()
      */
-    public function postAddAction(Request $request)
+    public function postAdd(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
@@ -91,8 +92,9 @@ class DefaultController extends AbstractController
      * @Route("/post/{id}/edit", name="_post_edit")
      * @Template()
      */
-    public function postEditAction($id, Request $request)
+    public function postEdit($id, Request $request)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $post = $this
             ->getDoctrine()
             ->getRepository(Post::class)
@@ -125,7 +127,7 @@ class DefaultController extends AbstractController
      * @Route("/users", name="_users")
      * @Template()
      */
-    public function usersAction()
+    public function users()
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 01 2019 г., 09:09
+-- Время создания: Апр 01 2019 г., 17:48
 -- Версия сервера: 5.6.38
 -- Версия PHP: 7.2.0
 
@@ -38,7 +38,8 @@ CREATE TABLE `migration_versions` (
 --
 
 INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
-('20190330204753', '2019-03-30 20:48:39');
+('20190330204753', '2019-03-30 20:48:39'),
+('20190401091822', '2019-04-01 14:48:20');
 
 -- --------------------------------------------------------
 
@@ -50,7 +51,7 @@ CREATE TABLE `post` (
   `id` int(11) NOT NULL,
   `author_id` int(11) DEFAULT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci,
+  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `published_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -109,7 +110,6 @@ CREATE TABLE `user_subscriber` (
 
 INSERT INTO `user_subscriber` (`user_id`, `subscription_on_id`) VALUES
 (1, 3),
-(1, 4),
 (1, 5),
 (1, 6),
 (2, 3),

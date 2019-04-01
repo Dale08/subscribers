@@ -21,7 +21,7 @@ class DefaultController extends AbstractController
      * @Route("/", name="app_homepage")
      * @Template()
      */
-    public function indexAction(AuthenticationUtils $authenticationUtils)
+    public function index(AuthenticationUtils $authenticationUtils)
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

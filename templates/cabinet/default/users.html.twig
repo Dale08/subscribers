@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            {% embed "cabinet/navigation.html.twig" %}{% endembed %}
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                {% for row in users|batch(3, '') %}
+                <div class="row">
+                    {% for user in row %}
+                        {% if user is not empty %}
+                            <div class="col-md-4 mb-4">
+                                <h2>{{ user.email }}</h2>
+                                    {% if user.id in subns %}
+                                        <div><a class="btn btn-danger subscribe" href="{{ path('ajax_remove_subscription') }}" data-user-id="{{ user.id }}" role="button">Unsubscribe</a></div>
+                                    {% else %}
+                                        <div><a class="btn btn-success subscribe" href="{{ path('ajax_add_subscription') }}" data-user-id="{{ user.id }}" role="button">Subscribe</a></div>
+                                    {% endif %}
+                            </div>
+                        {% endif  %}
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </main>
+        </div>
+    </div>
+
+{% endblock %}
